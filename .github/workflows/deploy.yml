@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use node js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v1
         with: 
           node-version: ${{ matrix.nodeversion }}
       - name: npm install and build
