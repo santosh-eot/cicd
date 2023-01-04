@@ -1,0 +1,46 @@
+name: cicd for test
+
+on: 
+  push:
+    branches: 
+        - main
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: action/checkout@v2
+      - name: Use nodejs
+        uses: action/setup-node@v1
+        with: 
+          node-version: ${{ matrix.nodeversion }}
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
+
+        env:
+          CI: true
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ssh deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST}}
+          username: ${{ secrets.USER}}
+          key: ${{ secrets.KEY}}
+          port: ${{ secrets.PORT}}
+          script: |
+            cd ~/cicd
+            git pull origin main
+            npm install
+            npm run build
+            pm2 restart cicd

@@ -1,0 +1,25 @@
+{
+  "name": "cicd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack --mode development",
+    "start:prod": "node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santosh-eot/cicd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santosh-eot/cicd/issues"
+  },
+  "homepage": "https://github.com/santosh-eot/cicd#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
