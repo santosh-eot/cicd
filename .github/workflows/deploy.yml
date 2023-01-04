@@ -24,6 +24,7 @@ jobs:
 
         env:
           CI: true
+          
 
   deploy:
     needs: [build]
