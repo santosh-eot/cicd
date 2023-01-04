@@ -21,7 +21,6 @@ jobs:
       - name: npm install and build
         run: |
           npm install
-          
 
         env:
           CI: true
@@ -42,5 +41,4 @@ jobs:
             cd ~/cicd
             git pull origin main
             npm install
-            
             pm2 restart cicd
