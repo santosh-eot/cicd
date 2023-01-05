@@ -1,4 +1,4 @@
-name: cicd for test
+name: first deployment
 
 on: 
   workflow_dispatch
