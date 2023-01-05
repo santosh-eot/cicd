@@ -38,7 +38,7 @@ jobs:
           key: ${{ secrets.KEY}}
           port: ${{ secrets.PORT}}
           script: |
-            sudo apt update
+            sudo apt-get update
             sudo apt install nodejs
             sudo apt install npm
             sudo npm install pm2 -g
