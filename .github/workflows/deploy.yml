@@ -21,7 +21,6 @@ jobs:
       - name: npm install and build
         run: |
           npm install
-          npm run build
 
         env:
           CI: true
@@ -39,8 +38,11 @@ jobs:
           key: ${{ secrets.KEY}}
           port: ${{ secrets.PORT}}
           script: |
+            sudo apt update
+            sudo apt install nodejs
+            sudo apt install npm
+            sudo npm install pm2 -g
+            git clone git@github.com:santosh-eot/cicd.git
             cd ~/cicd
-            git pull origin main
             npm install
-            npm run build
-            pm2 restart cicd
+            pm2 start server.js --name cicd
