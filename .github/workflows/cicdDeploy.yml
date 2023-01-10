@@ -43,17 +43,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - id: host
-        run: export AWSAKI=${{ github.event.inputs.host }} && echo "::set-output name=hostValue::${{ github.event.inputs.host }}"
-      - id: key
-        run: export AWSSAK=${{ github.event.inputs.key }} && echo "::set-output name=keyValue::${{ github.event.inputs.key }}"
+      - name: Determine host
+        id: fetchHost
+        with:
+          cond: ${{ github.event.inputs.host }} == 'HOST1'
+          if_true: 'HOST1'  # string value
+          if_false: 'HOST2' # string value
+      - name: Determine key
+        id: fetchKey
+        with:
+          cond: ${{ github.event.inputs.key }} == 'KEY1'
+          if_true: 'KEY1'  # string value
+          if_false: 'KEY2' # string value
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets[steps.host.outputs.hostValue] }}
-          key: ${{ secrets[steps.key.outputs.keyValue] }}
-          username: ${{ secrets.USER1 }}
-          port: ${{ secrets.PORT }}
+          host: ${{ secrets.[steps.fetchHost.outputs.value]}}
+          key: ${{ secrets.[steps.fetchKey.outputs.value]}}
+          username: ${{ secrets.USER}}
+          port: ${{ secrets.PORT}}
           script: |
             cd ~/cicd
             git pull origin main
