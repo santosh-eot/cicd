@@ -48,15 +48,15 @@ jobs:
         id: fetchHost
         with:
           cond: ${{ github.event.inputs.host }} == 'HOST1'
-          if_true: 'HOST1'  # string value
-          if_false: 'HOST2' # string value
+          if_true: 'HOST1'  
+          if_false: 'HOST2' 
       - name: Determine key
         uses: JasonEtco/create-an-issue@v3
         id: fetchKey
         with:
           cond: ${{ github.event.inputs.key }} == 'KEY1'
-          if_true: 'KEY1'  # string value
-          if_false: 'KEY2' # string value
+          if_true: 'KEY1'  
+          if_false: 'KEY2' 
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
