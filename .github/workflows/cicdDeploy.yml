@@ -44,9 +44,9 @@ jobs:
 
     steps:
       - id: host
-        run: echo "::set-output name=hostValue::${{ github.event.inputs.host }}"
+        run: export AWSAKI=${{ github.event.inputs.host }} && echo "::set-output name=hostValue::${{ github.event.inputs.host }}"
       - id: key
-        run: echo "::set-output name=keyValue::${{ github.event.inputs.key }}"
+        run: export AWSSAK=${{ github.event.inputs.key }} && echo "::set-output name=keyValue::${{ github.event.inputs.key }}"
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
