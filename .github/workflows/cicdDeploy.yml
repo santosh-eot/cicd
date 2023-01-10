@@ -44,9 +44,9 @@ jobs:
 
     steps:
       - id: host
-        run: export HOST=${{ github.event.inputs.host }} && echo "::set-output name=hostValue::${HOST^^}"
+        run: export HOST=${{ github.event.inputs.host }} && echo "::set-output name=hostValue::${HOST}"
       - id: key
-        run: export KEY=${{ github.event.inputs.key }} && echo "::set-output name=keyValue::${KEY^^}"
+        run: export KEY=${{ github.event.inputs.key }} && echo "::set-output name=keyValue::${KEY}"
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
