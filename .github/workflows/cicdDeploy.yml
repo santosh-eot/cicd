@@ -44,12 +44,14 @@ jobs:
 
     steps:
       - name: Determine host
+        uses: JasonEtco/create-an-issue@v3
         id: fetchHost
         with:
           cond: ${{ github.event.inputs.host }} == 'HOST1'
           if_true: 'HOST1'  # string value
           if_false: 'HOST2' # string value
       - name: Determine key
+        uses: JasonEtco/create-an-issue@v3
         id: fetchKey
         with:
           cond: ${{ github.event.inputs.key }} == 'KEY1'
