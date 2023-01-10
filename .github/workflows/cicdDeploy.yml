@@ -39,7 +39,7 @@ jobs:
     steps:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
-        with: 
+        with: |
           if [ ${{ github.events.input.host }} == 'host1' ]; then
             host: secrets.HOST1
             key: secrets.KEY1
