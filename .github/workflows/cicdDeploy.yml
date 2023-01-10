@@ -6,11 +6,11 @@ on:
       host:
         description: 'host to deploy'     
         required: true
-        default: 'host1'
+        default: 'HOST1'
       key:
         description: 'key for the host'     
         required: true
-        default: 'key1'
+        default: 'KEY1'
 
 jobs: 
   build:
@@ -39,14 +39,9 @@ jobs:
     steps:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
-        run: |
-          if [ ${{ github.events.input.host }} == 'host1' ]; then
-            host: secrets.HOST1
-            key: secrets.KEY1
-          else
-            host: secrets.HOST1
-            key: secrets.KEY1
-          fi
+        with:
+          host: ${{ secrets[github.event.inputs.host]}}
+          key: ${{ secrets[github.event.inputs.key]}}
           username: ${{ secrets.USER1}}
           port: ${{ secrets.PORT}}
           script: |
