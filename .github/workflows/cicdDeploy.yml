@@ -40,8 +40,8 @@ jobs:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets[github.event.inputs.host]}}
-          key: ${{ secrets[github.event.inputs.key]}}
+          host: ${{ secrets[${{github.event.inputs.host}}]}}
+          key: ${{ secrets[${{github.event.inputs.key}}]}}
           username: ${{ secrets.USER1}}
           port: ${{ secrets.PORT}}
           script: |
