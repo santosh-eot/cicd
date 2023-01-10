@@ -1,16 +1,7 @@
-name: cicd deployment with params
+name: cicd deployment host-1
 
 on: 
-  workflow_dispatch:
-    inputs:
-      host:
-        description: 'host to deploy'     
-        required: true
-        default: 'HOST1'
-      key:
-        description: 'key for the host'     
-        required: true
-        default: 'KEY1'
+  workflow_dispatch
 
 jobs: 
   build:
@@ -40,9 +31,9 @@ jobs:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ github.events.input.name == 'host1' && secrets.HOST1 || secret.HOST2}}
-          username: ${{ secrets.USER1}}
-          key: ${{ secrets.KEY}}
+          host: ${{ secrets.HOST1}}
+          key: ${{ secrets.KEY1}}
+          username: ${{ secrets.USER}}
           port: ${{ secrets.PORT}}
           script: |
             cd ~/cicd
