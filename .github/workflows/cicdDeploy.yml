@@ -43,25 +43,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Determine host
-        uses: JasonEtco/create-an-issue@v3
-        id: fetchHost
-        with:
-          cond: ${{ github.event.inputs.host }} == 'HOST1'
-          if_true: 'HOST1'  
-          if_false: 'HOST2' 
-      - name: Determine key
-        uses: JasonEtco/create-an-issue@v3
-        id: fetchKey
-        with:
-          cond: ${{ github.event.inputs.key }} == 'KEY1'
-          if_true: 'KEY1'  
-          if_false: 'KEY2' 
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets.[steps.fetchHost.outputs.value]}}
-          key: ${{ secrets.[steps.fetchKey.outputs.value]}}
+          host: ${{ github.event.inputs.host == 'HOST1' && secrets.HOST1 || secrets.HOST2 }}
+          key: ${{ github.event.inputs.key == 'KEY1' && secrets.KEY1 || secrets.KEY2 }}
           username: ${{ secrets.USER}}
           port: ${{ secrets.PORT}}
           script: |
