@@ -6,11 +6,11 @@ on:
       host:
         description: 'host to deploy'     
         required: true
-        default: 'HOST1'
+        default: 'host1'
       key:
         description: 'key for the host'     
         required: true
-        default: 'KEY1'
+        default: 'key1'
 
 jobs: 
   build:
