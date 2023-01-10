@@ -40,9 +40,9 @@ jobs:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ github.events.input.name == 'host1' && secrets.HOST1 || secret.HOST2}}
+          host: ${{ github.events.input.host == 'host1' && secrets.HOST1 || secret.HOST2}}
+          key: ${{ github.events.input.key == && secrets.KEY1 || secrets.KEY2}}
           username: ${{ secrets.USER1}}
-          key: ${{ secrets.KEY}}
           port: ${{ secrets.PORT}}
           script: |
             cd ~/cicd
