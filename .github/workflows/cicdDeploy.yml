@@ -39,9 +39,14 @@ jobs:
     steps:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ github.events.input.host == 'host1' && secrets.HOST1 || secrets.HOST2}}
-          key: ${{ github.events.input.key == && secrets.KEY1 || secrets.KEY2}}
+        with: 
+          if [ ${{ github.events.input.host }} == 'host1' ]; then
+            host: secrets.HOST1
+            key: secrets.KEY1
+          else
+            host: secrets.HOST1
+            key: secrets.KEY1
+          fi
           username: ${{ secrets.USER1}}
           port: ${{ secrets.PORT}}
           script: |
