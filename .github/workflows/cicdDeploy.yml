@@ -4,13 +4,19 @@ on:
   workflow_dispatch:
     inputs:
       host:
+        type: choice
         description: 'host to deploy'     
         required: true
-        default: 'HOST1'
+        options:
+          - HOST1
+          - HOST2
       key:
+        type: choice
         description: 'key for the host'     
         required: true
-        default: 'KEY1'
+        options:
+          - KEY1
+          - KEY2
 
 jobs: 
   build:
@@ -37,13 +43,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - id: host
+        run: export HOST=${{ github.event.inputs.host }} && echo "::set-output name=hostValue::${HOST^^}"
+      - id: key
+        run: export KEY=${{ github.event.inputs.key }} && echo "::set-output name=keyValue::${KEY^^}"
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets["${{github.event.inputs.host}}"]}}
-          key: ${{ secrets["${{github.event.inputs.key}}"]}}
-          username: ${{ secrets.USER1}}
-          port: ${{ secrets.PORT}}
+          host: ${{ secrets[steps.host.outputs.hostValue] }}
+          key: ${{ secrets[steps.key.outputs.keyValue] }}
+          username: ${{ secrets.USER1 }}
+          port: ${{ secrets.PORT }}
           script: |
             cd ~/cicd
             git pull origin main
