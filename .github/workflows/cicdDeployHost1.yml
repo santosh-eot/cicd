@@ -39,4 +39,4 @@ jobs:
             cd ~/cicd
             git pull origin main
             npm install
-            export TEST=santosh && pm2 start saerver.js --name cicd
+            export TEST=santosh && pm2 start server.js --name cicd
