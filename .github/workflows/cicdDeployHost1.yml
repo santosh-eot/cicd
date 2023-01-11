@@ -39,6 +39,4 @@ jobs:
             cd ~/cicd
             git pull origin main
             npm install
-            pm2 stop cicd
-            pm2 delete cicd
             export TEST=santosh && pm2 start saerver.js --name cicd
