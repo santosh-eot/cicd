@@ -38,6 +38,6 @@ jobs:
           script: |
             cd ~/cicd
             git pull origin main
-            export TEST=santosh
             npm install
-            pm2 restart cicd
+            pm2 stop cicd
+            export TEST=santosh && pm2 start cicd
