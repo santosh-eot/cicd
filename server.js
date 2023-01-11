@@ -5,5 +5,6 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, ()=>console.log(`server running on port ${PORT}`))
 
 app.get('/', (req, res)=>{
-    res.send(`update on host1 with params`)
+    res.send(`update on host1 with params, Hello from ${process.env.TEST}`)
 })
+
