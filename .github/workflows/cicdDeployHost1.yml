@@ -37,6 +37,7 @@ jobs:
           port: ${{ secrets.PORT}}
           script: |
             cd ~/cicd
+            echo -e "TEST1=santosh\nTEST2=rajesh" >> .env
             git pull origin main
-            npm install
-            export TEST=santosh && pm2 start server.js --name cicd
+            npm install 
+            pm2 restart cicd
