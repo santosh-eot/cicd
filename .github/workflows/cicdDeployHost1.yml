@@ -25,7 +25,7 @@ jobs:
           port: ${{ secrets.PORT}}
           script: |
             cd ~/cicd
-            echo -e "" >> .env
+            > .env
             echo -e "TEST1=matt\nTEST2=antonio" >> .env
             git pull origin main
             npm install 
