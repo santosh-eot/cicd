@@ -4,7 +4,7 @@ on:
   workflow_dispatch
 
 jobs: 
-  build:
+  deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -16,18 +16,6 @@ jobs:
         uses: actions/setup-node@v3
         with: 
           node-version: ${{ matrix.nodeversion }}
-      - name: npm install and build
-        run: |
-          npm install
-
-        env:
-          CI: true
-
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-
-    steps:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
