@@ -26,7 +26,7 @@ jobs:
           script: |
             cd ~/cicd
             > .env
-            echo -e "TEST1=matt\nTEST2=antonio" >> .env
+            echo -e "TEST1=santosh\nTEST2=rajesh" >> .env
             git pull origin main
             npm install 
             pm2 restart cicd
