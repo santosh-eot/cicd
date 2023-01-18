@@ -43,6 +43,6 @@ jobs:
             git clone cloneUrl 
             cd ~/folder 
             > .env
-            echo -e "TEST1=santosh\nTEST2=rajesh" >> .env
+            echo -e "envValue" >> .env
             npm install
             pm2 start server.js --name cicd
