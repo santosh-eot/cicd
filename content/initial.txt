@@ -1,22 +1,7 @@
-name: cicd deployment with params
+name: initial deployment serverValue 
 
 on: 
-  workflow_dispatch:
-    inputs:
-      host:
-        type: choice
-        description: 'host to deploy'     
-        required: true
-        options:
-          - HOST1
-          - HOST2
-      key:
-        type: choice
-        description: 'key for the host'     
-        required: true
-        options:
-          - KEY1
-          - KEY2
+  workflow_dispatch
 
 jobs: 
   build:
@@ -46,12 +31,18 @@ jobs:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ github.event.inputs.host == 'HOST1' && secrets.HOST1 || secrets.HOST2 }}
-          key: ${{ github.event.inputs.key == 'KEY1' && secrets.KEY1 || secrets.KEY2 }}
+          host: hostValue 
+          key: keyValue 
           username: ${{ secrets.USER}}
           port: ${{ secrets.PORT}}
           script: |
-            cd ~/cicd
-            git pull origin main
+            sudo apt-get update -y
+            sudo apt-get install nodejs -y
+            sudo apt-get install npm -y
+            sudo npm install pm2 -g
+            git clone cloneUrl 
+            cd ~/folder 
+            > .env
+            echo -e "TEST1=santosh\nTEST2=rajesh" >> .env
             npm install
-            pm2 restart cicd
+            pm2 start server.js --name cicd

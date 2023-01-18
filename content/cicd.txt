@@ -1,4 +1,4 @@
-name: cicd deployment host-1
+name: cicd deployment serverValue 
 
 on: 
   workflow_dispatch
@@ -19,14 +19,14 @@ jobs:
       - name: ssh deploy
         uses: appleboy/ssh-action@v0.1.6
         with:
-          host: ${{ secrets.HOST1}}
-          key: ${{ secrets.KEY1}}
+          host: hostValue 
+          key: keyValue 
           username: ${{ secrets.USER}}
           port: ${{ secrets.PORT}}
           script: |
             cd ~/cicd
             > .env
-            echo -e "TEST1=santosh\nTEST2=rajesh" >> .env
+            echo -e "ENV" >> .env
             git pull origin main
             npm install 
             pm2 restart cicd
