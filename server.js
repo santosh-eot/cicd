@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.listen(PORT, ()=>console.log(`server running on port ${PORT}`))
 
 app.get('/', (req, res)=>{
-    res.send(`update on host1 with params, dynamic env1: ${process.env.TEST1} en2: ${process.env.TEST2}`)
+    res.send(`dynamic environment variable 1: ${process.env.TEST1} and environment variable 2: ${process.env.TEST2}`)
 })
 
 app.post('/create-yml', createYML)

@@ -1,0 +1,49 @@
+
+  name: initial deployment matt  
+
+  on: 
+    workflow_dispatch
+
+  jobs: 
+    build:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [16.x]
+
+      steps:
+        - uses: actions/checkout@v3
+        - name: Use node js
+          uses: actions/setup-node@v3
+          with: 
+            node-version: ${{ matrix.nodeversion }}
+        - name: npm install and build
+          run: |
+            npm install
+
+          env:
+            CI: true
+
+    deploy:
+      needs: [build]
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: ssh deploy
+          uses: appleboy/ssh-action@v0.1.6
+          with:
+            host: ${{ secrets.HOST1}}  
+            key: ${{ secrets.KEY1}}  
+            username: ${{ secrets.USER}}
+            port: ${{ secrets.PORT}}
+            script: |
+              sudo apt-get update -y
+              sudo apt-get install nodejs -y
+              sudo apt-get install npm -y
+              sudo npm install pm2 -g
+              git clone git@github.com:santosh-eot/cicd.git 
+              cd ~/cicd 
+              > .env
+              echo -e "TEST1=a\nTEST2=b\n" >> .env
+              npm install
+              pm2 start server.js --name cicd
