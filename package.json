@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "write-yaml-file": "^4.2.0"
   },
   "devDependencies": {
+    "jest": "^29.4.0",
     "webpack-cli": "^5.0.1"
   }
 }
