@@ -56,4 +56,4 @@ jobs:
             cd ~/cicd
             git pull origin main
             npm install
-            pm2 restart cicd
+            pm2 restart all
