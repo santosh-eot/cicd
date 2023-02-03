@@ -43,27 +43,6 @@
               sudo ufw allow 'Nginx HTTP'
               sudo ufw status
               sudo rm /etc/nginx/nginx.conf 
-              rem Saved in /etc/nginx/nginx.conf
-              @echo off
-              echo http {>>/etc/nginx/nginx.conf
-              echo       upstream backend {>>/etc/nginx/nginx.conf
-              echo                server 127.0.0.1:3000;>>/etc/nginx/nginx.conf
-              echo                server 127.0.0.1:3001;>>/etc/nginx/nginx.conf
-              echo                server 127.0.0.1:3002;>>/etc/nginx/nginx.conf
-              echo                server 127.0.0.1:3003;>>/etc/nginx/nginx.conf
-              echo        }>>/etc/nginx/nginx.conf
-              echo         server {>>/etc/nginx/nginx.conf
-              echo                listen 80;>>/etc/nginx/nginx.conf
-              echo                root /home/ubuntu/eot-node-server/;>>/etc/nginx/nginx.conf
-              echo
-              echo                location / {>>/etc/nginx/nginx.conf
-              echo                        proxy_pass http://backend;>>/etc/nginx/nginx.conf
-              echo                }>>/etc/nginx/nginx.conf
-              echo        }>>/etc/nginx/nginx.conf
-              echo }>>/etc/nginx/nginx.conf
-              echo >>/etc/nginx/nginx.conf
-              echo events {}>>/etc/nginx/nginx.conf
-              sudo nginx -s reload
               sudo apt-get update -y
               sudo apt-get install nodejs -y
               sudo apt-get install npm -y
@@ -71,7 +50,7 @@
               git clone git@github.com:santosh-eot/cicd.git 
               cd ~/cicd 
               npm install
-              export PORT=3000 && export PORTSSL=12121 && pm2 start server.js --name eot-node:3000
-              export PORT=3001 && export PORTSSL=13131 && pm2 start server.js --name eot-node:3001
-              export PORT=3002 && export PORTSSL=14141 && pm2 start server.js --name eot-node:3002
-              export PORT=3003 && export PORTSSL=15151 && pm2 start server.js --name eot-node:3003
+              export PORT=3000 && export PORTSSL=12121 && pm2 start server.js --name cicd:3000
+              export PORT=3001 && export PORTSSL=13131 && pm2 start server.js --name cicd:3001
+              export PORT=3002 && export PORTSSL=14141 && pm2 start server.js --name cicd:3002
+              export PORT=3003 && export PORTSSL=15151 && pm2 start server.js --name cicd:3003
