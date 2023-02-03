@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 app.listen(PORT, ()=>console.log(`server running on port ${PORT}`))
 
 app.get('/', (req, res)=>{
-    res.send(`hello world`)
+    res.send(`hello world form port ${PORT}`)
 })
 
 app.post('/create-yml', createYML)
